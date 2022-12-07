@@ -43,7 +43,7 @@ export const AddSale = createAsyncThunk<boolean, ISale>(
 )
 
 
-const SalesSlice = createSlice({
+export const SalesSlice = createSlice({
    name: "sales",
    initialState: initialState,
    reducers: {},
