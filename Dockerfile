@@ -4,8 +4,8 @@ WORKDIR /app
 COPY package.json /app
 
 RUN npm install
-COPY . /app
+COPY ./ ./
 RUN npm run build --prod
  
 FROM nginx:1.17.1-alpine
-COPY --from=build-step /app/dist/inventory.frontend /usr/share/nginx/html
+COPY --from=build-step /app/build /usr/share/nginx/html 
