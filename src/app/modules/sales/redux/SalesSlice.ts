@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import toast from "react-hot-toast"
-import { IGetSales, ISale } from "../../../models/SalesModels"
+import { IGetSales, IPostSale, ISale } from "../../../models/SalesModels"
 import * as apiServer from "./SalesCrud"
 
 type SalesState = {
@@ -10,6 +10,7 @@ type SalesState = {
    entities?: IGetSales,
    selectedSale?: ISale,
    lastError: string
+   changed:boolean
 }
 
 const initialState: SalesState = {
@@ -18,10 +19,11 @@ const initialState: SalesState = {
    inProgress: false,
    entities: undefined,
    selectedSale: undefined,
-   lastError: ""
+   lastError: "",
+   changed:false
 }
 export const GetSales = createAsyncThunk<IGetSales>(
-   "sales/addSale",
+   "sales/getSales",
    async (_, thunkApi) => {
       try {
          const response = await apiServer.GetAllSales();
@@ -31,7 +33,7 @@ export const GetSales = createAsyncThunk<IGetSales>(
       }
    }
 )
-export const AddSale = createAsyncThunk<boolean, ISale>(
+export const AddSale = createAsyncThunk<boolean, IPostSale>(
    "sales/addSale",
    async (data, thunkApi) => {
       try {
@@ -65,6 +67,28 @@ export const SalesSlice = createSlice({
          state.loading = false
          state.lastError = ''
          state.lastError = action.error.message || 'Something went wrong'
+         toast.error("Failed! " + String(action.payload) || 'Something went wrong', {
+            style: {
+               border: '1px solid #bd1200',
+               padding: '16px',
+               backgroundColor: '#ffdada',
+            }
+         })
+      }),
+      builder.addCase(AddSale.fulfilled, (state, action) => {
+         state.loading = false;
+         state.lastError = '';
+         state.changed = !state.changed;
+         // eslint-disable-next-line 
+      }),
+       builder.addCase(AddSale.pending, (state, action) => {
+         state.loading = true
+         state.lastError = ''
+      }),
+      builder.addCase(AddSale.rejected, (state, action) => {
+         state.loading = false
+         state.lastError = ''
+         state.lastError = action.error.message || 'went wrong'
          toast.error("Failed! " + String(action.payload) || 'Something went wrong', {
             style: {
                border: '1px solid #bd1200',

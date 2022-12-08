@@ -6,8 +6,8 @@ const Header = () => {
             <div><header>
                 <div className="px-3 py-2 bg-dark text-white">
                     <div className="container">
-                        <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                            <span className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                        <div className="d-flex flex-wrap align-items-center justify-content-center">
+                            <span className="d-flex align-items-center my-2 my-lg-0 text-white text-decoration-none">
                             </span>
 
                             <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">

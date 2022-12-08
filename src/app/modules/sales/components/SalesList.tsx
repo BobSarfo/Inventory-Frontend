@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Card, Table } from 'react-bootstrap-v5'
+import { Card, Table } from 'react-bootstrap-v5'
 import { useAppDispatch, useAppSelector } from '../../../../setup/redux/Hooks'
 import { LoadingPlaceholder } from '../../../_shared/components/LoadingPlaceholder'
 import { GetSales } from '../redux/SalesSlice'
@@ -11,19 +11,14 @@ const SalesList = () => {
     useEffect(() => {
         dispatch(GetSales());
         // eslint-disable-next-line
-    }, [])
-
-    const handleShow = () => { }
+    }, [sales.changed])
 
     return (
         <div><Card className='border-0 pt-2'>
             <Card.Header>
                 <div className='card-title align-items-start flex-column'>
                     <span className='card-label fw-bolder fs-3'>Sales</span>
-                    <span className='text-muted mt-1 fw-bold fs-7'> Total Sales: {sales.entities?.sales.length || 0}</span>
-                </div>
-                <div className='d-flex justify-content-end p-1'>
-                    <Button onClick={handleShow} variant='primary'>Create Create </Button>
+                    <span className='text-muted mt-1 fw-bold fs-7'> Total Sales: {(sales.entities?.sales.length??0) || 0}</span>
                 </div>
             </Card.Header>
 
@@ -59,7 +54,7 @@ const SalesList = () => {
                     </Table>
                     {sales.loading && <LoadingPlaceholder />}
                     {
-                        (sales.entities?.sales.length === 0 && !sales.loading) &&
+                        ((sales.entities?.sales.length??0) === 0 && !sales.loading) &&
                         <>
                             <div className='pt-4 d-flex justify-content-center '>
                                 {"  "} <h5 className='text-dark  px-3 pt-1'>No data available ...</h5>
