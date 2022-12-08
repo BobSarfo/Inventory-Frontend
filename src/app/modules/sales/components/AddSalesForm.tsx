@@ -77,20 +77,24 @@ const AddSalesForm = () => {
 
                 <div className='mb-5'>
                   <div className='form-text'>
-                    Product Name
+                    Product Name (Select from list below)
                   </div>
                   <Field
-                    name='productName'
-                    type='text'
-                    placeholder="Product Name"
-                    className='form-control form-control'
-                  />
+                    as='select'
+                    name={`productName`}
+                    className='form-select form-select form-select-solid'
+                  >
+                    <option></option>
+                    <option value='laptop'>laptop</option>
+                    <option value='keyboard'>keyboard</option>
+                    <option value='paper'>paper </option>
+                    <option value='ruler'>ruler </option>
+                    <option value='mouse'>mouse </option>
+                  </Field>
                   <div className='text-danger mt-2'>
                     <ErrorMessage name='productName' />
                   </div>
                 </div>
-
-                
               </div>
             </>
             <Row className='justify-content-end'>
