@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './app/App';
 import { Provider } from 'react-redux'
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import reportWebVitals from './reportWebVitals';
 import { Toaster } from 'react-hot-toast'
 import store from './setup/redux/Store';
